@@ -20,17 +20,14 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->integer('price');
             $table->integer('quantity');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
      
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->foreign('category_id')
-            ->references('id')
-            ->on('categories')
-            ->onDelete('cascade');
+            
         });
     }
 

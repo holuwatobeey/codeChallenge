@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use JWTAuth;
+use App\Category;
 
 class CategoryController extends Controller
 {
@@ -44,8 +46,7 @@ class CategoryController extends Controller
         ]);
 
         $category = new Category();
-        $category->title = $request->title;
-        $category->description = $request->description;
+        $category->name = $request->name;
 
         if ($this->user->categories()->save($category))
             return response()->json([
