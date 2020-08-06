@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use JWTAuth;
 use App\Product;
+use App\Exports\ProductExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -117,5 +119,13 @@ class ProductController extends Controller
                 'message' => 'Sorry, product could not be deleted.'
             ], 500);
         }
+    }
+    public function exportExcel() 
+    {
+            return Excel::download(new ProductExport, 'product.xlsx');
+    }
+    public function exportCsv() 
+    {
+            return Excel::download(new ProductExport, 'product.csv');
     }
 }

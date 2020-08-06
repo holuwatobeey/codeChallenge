@@ -34,4 +34,6 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('products', 'ProductController@store');
     Route::put('products/{id}', 'ProductController@update');
     Route::delete('products/{id}', 'ProductController@destroy');
+    Route::get('export-excel', 'ProductController@exportExcel');
+    Route::get('export-csv', 'ProductController@exportCsv');
 });
