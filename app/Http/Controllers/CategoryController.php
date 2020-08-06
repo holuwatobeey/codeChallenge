@@ -12,7 +12,7 @@ class CategoryController extends Controller
     protected $user;
 
     /**
-     * TaskController constructor.
+     * CategoryController constructor.
      */
     public function __construct()
     {
@@ -20,8 +20,42 @@ class CategoryController extends Controller
     }
     public function index()
     {
-        $categories = $this->user->tasks()->get(['name'])->toArray();
+        $categories = $this->user->categories()->get(['name'])->toArray();
 
         return $categories;
+    }
+    public function show($id)
+    {
+        $category = $this->user->categories()->find($id);
+
+        if (!$category) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, category does not exist.'
+            ], 400);
+        }
+
+        return $category;
+    }
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $category = new Category();
+        $category->title = $request->title;
+        $category->description = $request->description;
+
+        if ($this->user->categories()->save($category))
+            return response()->json([
+                'success' => true,
+                'category' => $category
+            ]);
+        else
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, category could not be added.'
+            ], 500);
     }
 }
