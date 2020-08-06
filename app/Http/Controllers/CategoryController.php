@@ -58,4 +58,28 @@ class CategoryController extends Controller
                 'message' => 'Sorry, category could not be added.'
             ], 500);
     }
+    public function update(Request $request, $id)
+    {
+        $category = $this->user->categories()->find($id);
+
+        if (!$category) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, category does not exist.'
+            ], 400);
+        }
+
+        $updated = $category->fill($request->all())->save();
+
+        if ($updated) {
+            return response()->json([
+                'success' => true
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, category could not be updated.'
+            ], 500);
+        }
+    }
 }
