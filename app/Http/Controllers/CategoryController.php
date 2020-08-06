@@ -82,4 +82,26 @@ class CategoryController extends Controller
             ], 500);
         }
     }
+    public function destroy($id)
+    {
+        $category = $this->user->categories()->find($id);
+
+        if (!$category) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, category does not exist.'
+            ], 400);
+        }
+
+        if ($category->delete()) {
+            return response()->json([
+                'success' => true
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, category could not be deleted.'
+            ], 500);
+        }
+    }
 }
