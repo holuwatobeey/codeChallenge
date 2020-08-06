@@ -14,6 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('export-excel', 'ProductController@exportExcel');
-Route::get('export-csv', 'ProductController@exportCsv');

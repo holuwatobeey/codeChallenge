@@ -37,3 +37,5 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('export-excel', 'ProductController@exportExcel');
     Route::get('export-csv', 'ProductController@exportCsv');
 });
+
+Route::get('factorial', 'ProductController@getFactorial');

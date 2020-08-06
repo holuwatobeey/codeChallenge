@@ -18,10 +18,10 @@ class ProductController extends Controller
     /**
      * ProductController constructor.
      */
-    public function __construct()
-    {
-        $this->user = JWTAuth::parseToken()->authenticate();
-    }
+    // public function __construct()
+    // {
+    //     $this->user = JWTAuth::parseToken()->authenticate();
+    // }
     public function index()
     {
         $products = $this->user->products()->get(['name','price','quantity'])->toArray();
@@ -122,10 +122,21 @@ class ProductController extends Controller
     }
     public function exportExcel() 
     {
-            return Excel::download(new ProductExport, 'product.xlsx');
+        return Excel::download(new ProductExport, 'product.xlsx');
     }
     public function exportCsv() 
     {
-            return Excel::download(new ProductExport, 'product.csv');
+        return Excel::download(new ProductExport, 'product.csv');
+    }
+    public function getFactorial()
+    {
+        $num = 13;  
+        $factorial = 1;  
+        for ($x=$num; $x>=1; $x--)   
+        {  
+        $factorial = $factorial * $x;  
+        }  
+        echo "Factorial of $num is $factorial";  
+
     }
 }
