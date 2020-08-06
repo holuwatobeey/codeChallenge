@@ -1,3 +1,4 @@
+<?php
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -53,5 +54,9 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }
