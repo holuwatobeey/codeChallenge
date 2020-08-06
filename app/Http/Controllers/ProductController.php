@@ -18,10 +18,10 @@ class ProductController extends Controller
     /**
      * ProductController constructor.
      */
-    // public function __construct()
-    // {
-    //     $this->user = JWTAuth::parseToken()->authenticate();
-    // }
+    public function __construct()
+    {
+        $this->user = JWTAuth::parseToken()->authenticate();
+    }
     public function index()
     {
         $products = $this->user->products()->get(['name','price','quantity'])->toArray();
